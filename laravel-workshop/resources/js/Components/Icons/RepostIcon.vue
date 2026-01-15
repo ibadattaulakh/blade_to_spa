@@ -1,5 +1,11 @@
+<script>
+export default {
+    name: 'RepostIcon'
+}
+</script>
+
 <template>
-    <svg xmlns=" http://www.w3.org/2000/svg" fill="none" class="h-[17px]" viewBox="0 0 20 17">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-[17px]" viewBox="0 0 20 17" aria-hidden="true">
         <path fill="currentColor" d="M1.429 3.857H0v1.429h1.429V3.857Z" />
         <path fill="currentColor" d="M2.854 3.857H1.426v1.429h1.428V3.857Z" />
         <path fill="currentColor" d="M2.854 2.429H1.426v1.429h1.428V2.429Zm1.432 0H2.858v1.429h1.428v-1.43Z" />

@@ -1,5 +1,11 @@
+<script>
+export default {
+    name: 'VideoIcon'
+}
+</script>
+
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-6" viewBox="0 0 24 19">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-6" viewBox="0 0 24 19" aria-hidden="true">
         <g fill="#EEE" clip-path="url(#a)">
             <path d="M1.602 1.584h-1.6v1.584h1.6V1.584ZM3.202 0h-1.6v1.584h1.6V0Zm1.601 0h-1.6v1.584h1.6V0Z" />
             <path d="M6.403 0h-1.6v1.584h1.6V0Z" />

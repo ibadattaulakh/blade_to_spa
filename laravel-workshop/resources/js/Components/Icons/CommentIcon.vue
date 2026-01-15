@@ -1,5 +1,11 @@
+<script>
+export default {
+    name: 'CommentIcon'
+}
+</script>
+
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-[17px]" viewBox="0 0 20 17">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-[17px]" viewBox="0 0 20 17" aria-hidden="true">
         <g fill="currentColor" clip-path="url(#a)">
             <path d="M3.581 0h1.824v1.824H3.581z" />
             <path

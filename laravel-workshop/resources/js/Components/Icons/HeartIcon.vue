@@ -1,5 +1,11 @@
+<script>
+export default {
+    name: 'HeartIcon'
+}
+</script>
+
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-[17px]" viewBox="0 0 20 17">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-[17px]" viewBox="0 0 20 17" aria-hidden="true">
         <g fill="currentColor" clip-path="url(#a)">
             <path
                 d="M5.714 0H2.857v2.857h2.857V0Zm2.858 0H5.714v2.857h2.858V0Zm2.857 2.858H8.57v2.857h2.858V2.858ZM14.288 0h-2.857v2.857h2.857V0Z" />

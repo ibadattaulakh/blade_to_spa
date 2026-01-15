@@ -1,5 +1,11 @@
+<script>
+export default {
+    name: 'BackIcon'
+}
+</script>
+
 <template>
-    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="none">
+    <svg class="size-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="none" aria-hidden="true">
         <path fill="currentColor"
             d="M6.857 0v1.714H5.143V0zM5.143 1.715v1.714H3.429V1.715zM3.427 3.429v1.714H1.713V3.429zM1.715 5.143v1.714H0V5.143zm1.713 1.715v1.714H1.714V6.858zm1.714 1.714v1.714H3.428V8.572zm1.715 1.713V12H5.143v-1.714z">
         </path>

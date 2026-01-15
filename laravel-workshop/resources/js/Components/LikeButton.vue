@@ -1,24 +1,32 @@
 <script setup>
 import HeartIcon from './Icons/HeartIcon.vue';
-import { Form } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     post: Object
 });
+
+const form = useForm({});
+
+function toggleLike() {
+    if (props.post.has_liked) {
+        form.post(route('posts.unlike', [props.post.profile, props.post]));
+    } else {
+        form.post(route('posts.like', [props.post.profile, props.post]));
+    }
+}
 </script>
 
 <template>
-    <Form method="POST" :action="route(post.has_liked ? 'posts.unlike' : 'posts.like', [post.profile, post])">
-        <div class="flex items-center gap-1">
-            <button aria-label="Like" :class="post.has_liked ? 'hover:text-pixl text-pixl' : ''"
-                data-test="like-post-button">
-                <HeartIcon />
-            </button>
+    <div class="flex items-center gap-1">
+        <button @click.prevent="toggleLike" aria-label="Like"
+            :class="post.has_liked ? 'hover:text-pixl text-pixl' : ''" data-test="like-post-button">
+            <HeartIcon />
+        </button>
 
-            <span data-test="like-post-count" :class="post.has_liked ? 'hover:text-pixl text-pixl' : ''"
-                class="text-sm">
-                {{ post.likes_count }}
-            </span>
-        </div>
-    </Form>
+        <span data-test="like-post-count" :class="post.has_liked ? 'hover:text-pixl text-pixl' : ''"
+            class="text-sm">
+            {{ post.likes_count }}
+        </span>
+    </div>
 </template>

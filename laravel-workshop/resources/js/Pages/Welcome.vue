@@ -1,15 +1,10 @@
 <script setup>
-import Layout from '../Layouts/Layout.vue';
-
-defineProps({
-    greeting: ''
-});
+defineProps({ greeting: String });
 </script>
 
 <template>
-    <Layout>
-        <div class="flex-1">
-            {{ greeting }}
-        </div>
-    </Layout>
+    <div>
+        <h1>{{ greeting }}</h1>
+        <p>Hello from Vue + Inertia.</p>
+    </div>
 </template>

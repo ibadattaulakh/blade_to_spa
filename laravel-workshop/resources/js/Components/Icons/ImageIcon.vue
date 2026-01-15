@@ -1,5 +1,11 @@
+<script>
+export default {
+    name: 'ImageIcon'
+}
+</script>
+
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-6" fill="none" viewBox="0 0 24 19">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6" fill="none" viewBox="0 0 24 19" aria-hidden="true">
         <g fill="#EEE" clip-path="url(#a)">
             <path
                 d="M1.598 1.584h-1.6v1.584h1.6V1.584ZM3.196 0h-1.6v1.584h1.6V0Zm1.601 0h-1.6v1.584h1.6V0ZM6.4 0H4.8v1.584h1.6V0ZM8 0H6.4v1.584H8V0Z" />

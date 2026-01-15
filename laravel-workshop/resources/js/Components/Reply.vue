@@ -52,8 +52,8 @@ defineProps({
                 </div>
             </div>
 
-            <ol v-if="showReplies">
-                <Reply v-for="reply in post.replies" :key="post.id" :post="reply" :show-engagement="showEngagement"
+            <ol v-if="showReplies && post.replies && post.replies.length">
+                <Reply v-for="reply in post.replies" :key="reply.id" :post="reply" :show-engagement="showEngagement"
                     :show-replies="showReplies" />
             </ol>
         </div>

@@ -8,8 +8,20 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-Route::get('/', HomeController::class)->middleware('guest');
+// Tutorial example route
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome', ['greeting' => 'Hello']);
+});
+
+// Homepage: show Home page for guests, redirect authenticated users to feed
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('posts.index');
+    }
+    return Inertia::render('Home');
+});
 
 if (! app()->isProduction()) {
     Route::get('/dev/login', function () {

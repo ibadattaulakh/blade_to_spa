@@ -1,7 +1,8 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 
-defineProps({ profile: Object });
+const props = defineProps({ profile: Object });
+const page = usePage();
 </script>
 
 <template>
@@ -18,7 +19,10 @@ defineProps({ profile: Object });
                     </div>
                 </div>
 
-                <Link v-if="$page.props.auth.user && profile.id !== $page.props.auth.user?.profile.id" method="POST"
+                <Link 
+                    v-if="page.props.auth.user && profile.id !== page.props.auth.user?.profile.id" 
+                    method="POST"
+                    as="button"
                     :href="route(profile.has_followed ? 'profiles.unfollow' : 'profiles.follow', profile)"
                     class="bg-pixl-dark/50 hover:bg-pixl-dark/60 active:bg-pixl-dark/75 border-pixl/50 hover:border-pixl/60 active:border-pixl/75 text-pixl border px-2 py-1 text-sm"
                     data-test="follow-button">
@@ -46,11 +50,11 @@ defineProps({ profile: Object });
                 <ul class="flex min-w-max justify-end gap-8 text-sm">
                     <li>
                         <Link :href="route('profiles.show', profile)"
-                            :class="route().current('profiles.show') ? 'text-pixl' : 'text-pixl-light/60'">Posts</Link>
+                            :class="page.component === 'Profiles/Show' && !page.url.includes('with_replies') ? 'text-pixl' : 'text-pixl-light/60'">Posts</Link>
                     </li>
                     <li>
                         <Link class="hover:text-pixl-light/80"
-                            :class="route().current('profiles.replies') ? 'text-pixl' : 'text-pixl-light/60'"
+                            :class="page.url.includes('with_replies') ? 'text-pixl' : 'text-pixl-light/60'"
                             :href="route('profiles.replies', profile)">Replies</Link>
                     </li>
                     <li>

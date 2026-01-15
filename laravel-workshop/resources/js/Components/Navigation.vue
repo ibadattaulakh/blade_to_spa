@@ -3,8 +3,10 @@ import {Link, usePage} from '@inertiajs/vue3';
 import Logo from './Logo.vue';
 import {computed} from "vue";
 
-let currentProfile = computed(() => {
-    return usePage().props.auth.user.profile;
+const page = usePage();
+
+const currentProfile = computed(() => {
+    return page.props.auth.user?.profile;
 });
 </script>
 
@@ -13,7 +15,7 @@ let currentProfile = computed(() => {
     <header class="my-4 hidden w-48 shrink-0 flex-col justify-between gap-8 pl-4 sm:flex xl:ml-32">
         <div class="overflow-y-auto">
             <!-- Logo -->
-            <a href="/">
+            <a :href="route('posts.index')">
                 <Logo />
             </a>
 
@@ -21,10 +23,10 @@ let currentProfile = computed(() => {
             <nav class="mt-10">
                 <ul class="flex flex-col gap-3.5">
                     <li>
-                        <a :href="route('posts.index')" class="hover:underline" :class="{ 'text-pixl': $page.component === 'Posts/Index' }">Home</a>
+                        <a :href="route('posts.index')" class="hover:underline" :class="{ 'text-pixl': page.component === 'Posts/Index' }">Home</a>
                     </li>
                     <li>
-                        <a :href="route('profiles.show', currentProfile)" class="hover:underline" :class="{ 'text-pixl': $page.component === 'Profiles/Show' }">Profile</a>
+                        <a :href="route('profiles.show', currentProfile)" class="hover:underline" :class="{ 'text-pixl': page.component === 'Profiles/Show' }">Profile</a>
                     </li>
 
                     <li><a class="hover:underline" href="#">Explore</a></li>
@@ -45,8 +47,8 @@ let currentProfile = computed(() => {
         </div>
 
         <div class="flex flex-col gap-6">
-            <!-- TODO: This should only display if we are NOT on the posts.index route. -->
-            <Link v-show="$page.component !== 'Posts/Index'" :href="route('posts.index')"
+            <!-- Post button only shows when not on the posts index page -->
+            <Link v-if="page.component !== 'Posts/Index'" :href="route('posts.index')"
                 class="bg-pixl hover:bg-pixl/90 active:bg-pixl/95 text-pixl-dark border border-transparent px-4 py-3 text-sm text-center">
             Post
             </Link>

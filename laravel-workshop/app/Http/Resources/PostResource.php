@@ -22,18 +22,28 @@ class PostResource extends JsonResource
             'content' => $this->content,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at,
-            'profile' => new ProfileResource($this->whenLoaded('profile')),
-            'repost_of' => new PostResource($this->whenLoaded('repostOf')),
-            'replies' => PostResource::collection($this->whenLoaded('replies')),
+            'profile' => $this->whenLoaded('profile', function () {
+                return new ProfileResource($this->profile);
+            }),
+            'repost_of' => $this->whenLoaded('repostOf', function () {
+                return new PostResource($this->repostOf);
+            }),
+            'replies' => $this->whenLoaded('replies', function () {
+                return PostResource::collection($this->replies);
+            }),
             'replies_count' => $this->whenCounted('replies'),
-            'likes' => LikeResource::collection($this->whenLoaded('likes')),
+            'likes' => $this->whenLoaded('likes', function () {
+                return LikeResource::collection($this->likes);
+            }),
             'likes_count' => $this->whenCounted('likes'),
-            'has_liked' => $this->has_liked,
-            'reposts' => PostResource::collection($this->whenLoaded('reposts')),
+            'has_liked' => $this->has_liked ?? false,
+            'reposts' => $this->whenLoaded('reposts', function () {
+                return PostResource::collection($this->reposts);
+            }),
             'reposts_count' => $this->whenCounted('reposts'),
-            'has_reposted' => $this->has_reposted,
+            'has_reposted' => $this->has_reposted ?? false,
             'can' => [
-                'update' => Auth::user()->can('update', $this->resource),
+                'update' => $request->user() ? $request->user()->can('update', $this->resource) : false,
             ],
         ];
     }

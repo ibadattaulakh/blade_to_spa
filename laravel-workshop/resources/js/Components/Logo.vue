@@ -1,5 +1,11 @@
+<script>
+export default {
+    name: 'Logo'
+}
+</script>
+
 <template>
-    <svg class="h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 182 61" fill="none">
+    <svg class="h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 182 61" fill="none" aria-label="Site Logo">
         <path fill="#EEE" d="M10.083 0H0v10.083h10.083V0Zm10.084 0H10.084v10.083h10.083V0Z"></path>
         <path fill="#EEE"
             d="M30.25 0H20.165v10.083h10.083V0ZM10.083 10.083H0v10.084h10.083V10.083Zm30.25 0H30.25v10.084h10.083V10.083Zm-30.25 10.084H0V30.25h10.083V20.167Zm30.25 0H30.25V30.25h10.083V20.167ZM10.083 30.25H0v10.083h10.083V30.25Zm10.084 0H10.084v10.083h10.083V30.25Z">

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\ProfileResource;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\Profile;
@@ -23,8 +25,8 @@ class PostController extends Controller
         $posts = TimelineQuery::forViewer($profile)->get();
 
         return Inertia::render('Posts/Index', [
-            'profile' => $profile->toResource(),
-            'posts' => $posts->toResourceCollection(),
+            'profile' => new ProfileResource($profile),
+            'posts' => PostResource::collection($posts),
         ]);
     }
 
@@ -33,7 +35,7 @@ class PostController extends Controller
         $post = PostThreadQuery::for($post, Auth::user()?->profile)->load();
 
         return Inertia::render('Posts/Show', [
-            'post' => $post->toResource(),
+            'post' => new PostResource($post),
         ]);
     }
 
@@ -52,7 +54,8 @@ class PostController extends Controller
 
         Post::reply($currentProfile, $post, $createPostRequest->input('content'));
 
-        return back();
+        // Redirect to post show page so user can see the full thread
+        return to_route('posts.show', [$profile, $post]);
     }
 
     public function repost(Profile $profile, Post $post)
@@ -93,10 +96,12 @@ class PostController extends Controller
 
     public function destroy(Profile $profile, Post $post): RedirectResponse
     {
-        if (Auth::user()->can('update', $post)) {
-            $post->delete();
-        }
+        $this->authorize('update', $post);
 
+        // Delete original post
+        $post->delete();
+
+        // Delete any reposts for this post by the current user (if any)
         $post
             ->reposts()
             ->where('profile_id', Auth::user()->profile->id)

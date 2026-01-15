@@ -6,17 +6,23 @@ import SaveButton from './SaveButton.vue';
 import ShareButton from './ShareButton.vue';
 import Reply from './Reply.vue';
 import ReplyForm from './ReplyForm.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     post: Object,
     showEngagement: { type: Boolean, default: true },
     showReplies: { type: Boolean, default: false },
 });
 
+const page = usePage();
 let showReplyForm = ref(false);
+
+// Guard against null repost_of to prevent "Cannot read properties of undefined" errors
+const isRepost = computed(() => {
+    return !!props.post.repost_of && !!props.post.repost_of.content;
+});
 </script>
 
 <template>
@@ -81,7 +87,8 @@ let showReplyForm = ref(false);
                 <div class="[&_a]:text-pixl mt-4 flex flex-col gap-3 text-sm [&_a]:hover:underline">
                     <div v-html="post.content"></div>
 
-                    <ul v-if="!!post.repost_of">
+                    <!-- Render repost only if repost_of exists and has content -->
+                    <ul v-if="isRepost">
                         <Post :post="post.repost_of" :show-engagement="false" />
                     </ul>
                 </div>
@@ -99,12 +106,12 @@ let showReplyForm = ref(false);
                     </div>
                 </div>
 
-                <ReplyForm v-show="showReplyForm" :post="post" :profile="$page.props.auth.user.profile"
+                <ReplyForm v-if="showReplyForm" :post="post" :profile="page.props.auth.user.profile"
                     @success="showReplyForm = false" />
             </div>
 
-            <ol v-if="showReplies">
-                <Reply v-for="reply in post.replies" :key="post.id" :post="reply" :show-engagement="showEngagement"
+            <ol v-if="showReplies && post.replies && post.replies.length">
+                <Reply v-for="reply in post.replies" :key="reply.id" :post="reply" :show-engagement="showEngagement"
                     :show-replies="showReplies" />
             </ol>
         </div>

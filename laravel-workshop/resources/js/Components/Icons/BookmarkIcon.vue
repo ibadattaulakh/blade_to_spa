@@ -1,5 +1,11 @@
+<script>
+export default {
+    name: 'BookmarkIcon'
+}
+</script>
+
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-[17px]" viewBox="0 0 14 17">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-[17px]" viewBox="0 0 14 17" aria-hidden="true">
         <g fill="currentColor" clip-path="url(#a)">
             <path
                 d="M1.545 7.727H0v1.546h1.545V7.727Zm0 1.546H0v1.545h1.545V9.273Zm0 1.545H0v1.546h1.545v-1.546Zm0 1.546H0v1.545h1.545v-1.545Zm0 1.546H0v1.545h1.545v-1.546Zm1.545 1.544H1.546V17h1.546v-1.546Z" />
